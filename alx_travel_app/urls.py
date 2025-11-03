@@ -1,1 +1,0 @@
-# Placeholder Django urls file
