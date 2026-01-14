@@ -1,6 +1,6 @@
 from django.urls import path
-from . import views
+from .views import trigger_email
 
 urlpatterns = [
-    path('', views.index, name='index'),
+    path("send-email/", trigger_email),
 ]

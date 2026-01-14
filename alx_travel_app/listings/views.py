@@ -1,10 +1,9 @@
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
-from .models import Listing
-from .serializers import ListingSerializer
+from .tasks import send_test_email
 
-@api_view(['GET'])
-def index(request):
-    qs = Listing.objects.all()
-    serializer = ListingSerializer(qs, many=True)
-    return Response(serializer.data)
+@api_view(["POST"])
+def trigger_email(request):
+    email = request.data.get("email")
+    send_test_email.delay(email)
+    return Response({"message": "Email task triggered"})
